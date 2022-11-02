@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/showProductFragment">
+
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.example.crudoperation.AddProductFragment"
+        android:label="Add product"
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            android:id="@+id/action_addProductFragment_to_showProductFragment"
+            app:destination="@id/showProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showProductFragment"
+        android:name="com.example.crudoperation.ShowProductFragment"
+        android:label="Inventory"
+        tools:layout="@layout/fragment_show_product" >
+        <action
+            android:id="@+id/action_showProductFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_showProductFragment_to_addProductFragment2"
+            app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_showProductFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_showProductFragment_to_updateFragment2"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.crudoperation.UpdateFragment"
+        android:label="Edit Data"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_updateFragment_to_showProductFragment"
+            app:destination="@id/showProductFragment" />
+        <argument
+            android:name="productID"
+            app:argType="long" />
+    </fragment>
+</navigation>
