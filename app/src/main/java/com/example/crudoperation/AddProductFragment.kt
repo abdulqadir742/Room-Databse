@@ -43,12 +43,13 @@ class AddProductFragment : Fragment() {
             else{
                 GlobalScope.launch {
                     DB.productDao().insert(Product(0,ProductName,ProductPrice.toInt(),ProductStock.toInt()))
-                    binding.proName.setText("")
-                    binding.proPrice.setText("")
-                    binding.proStock.setText("")
 
-                    findNavController().navigate(R.id.action_addProductFragment_to_showProductFragment)
                 }
+                findNavController().navigate(R.id.action_addProductFragment_to_showProductFragment)
+                binding.proName.setText("")
+                binding.proPrice.setText("")
+                binding.proStock.setText("")
+
             }
 
         }
