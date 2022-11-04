@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.room.Database
@@ -50,13 +51,29 @@ class UpdateFragment : Fragment() {
 
         binding.btnUpdate.setOnClickListener {
             var ProductName = binding.UpdateProName.text.toString()
-            var ProductPrice = binding.UpdateproPrice.text.toString().toInt()
-            var ProductStock = binding.UpdateproStock.text.toString().toInt()
+            var ProductPrice = binding.UpdateproPrice.text.toString()
+            var ProductStock = binding.UpdateproStock.text.toString()
 
-            GlobalScope.launch {
-                DB.productDao().getUpdateProduct(productId, ProductName, ProductPrice, ProductStock)
+
+            if (ProductName.isEmpty() || ProductPrice.isEmpty() || ProductStock.isEmpty())
+            {
+                Toast.makeText(context,"All fields are required", Toast.LENGTH_SHORT).show()
             }
+            else{
+                GlobalScope.launch {
+                    DB.productDao().getUpdateProduct(
+                        productId,
+                        ProductName,
+                        ProductPrice.toInt(),
+                        ProductStock.toInt()
+                    )
+                }
+                    findNavController().navigate(R.id.action_updateFragment_to_showProductFragment)
 
+            }
+        }
+
+        binding.btnCancel.setOnClickListener{
             findNavController().navigate(R.id.action_updateFragment_to_showProductFragment)
         }
 

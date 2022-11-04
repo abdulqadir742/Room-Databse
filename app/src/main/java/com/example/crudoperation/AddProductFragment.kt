@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.example.crudoperation.databinding.FragmentAddProductBinding
@@ -32,24 +33,28 @@ class AddProductFragment : Fragment() {
 
         binding.btnSave.setOnClickListener{
             var ProductName = binding.proName.text.toString()
-            var ProductPrice = binding.proPrice.text.toString().toInt()
-            var ProductStock = binding.proStock.text.toString().toInt()
+            var ProductPrice = binding.proPrice.text.toString()
+            var ProductStock = binding.proStock.text.toString()
 
-            GlobalScope.launch {
-                DB.productDao().insert(Product(0,ProductName,ProductPrice,ProductStock))
+            if (ProductName.isEmpty() || ProductPrice.isEmpty() || ProductStock.isEmpty())
+            {
+                Toast.makeText(context,"All fields are required",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                GlobalScope.launch {
+                    DB.productDao().insert(Product(0,ProductName,ProductPrice.toInt(),ProductStock.toInt()))
+                    binding.proName.setText("")
+                    binding.proPrice.setText("")
+                    binding.proStock.setText("")
+
+                    findNavController().navigate(R.id.action_addProductFragment_to_showProductFragment)
+                }
             }
 
-            binding.proName.setText("")
-            binding.proPrice.setText("")
-            binding.proStock.setText("")
-
-            findNavController().navigate(R.id.action_addProductFragment_to_showProductFragment)
         }
 
         binding.btnCancel.setOnClickListener{
-            binding.proName.setText("")
-            binding.proPrice.setText("")
-            binding.proStock.setText("")
+            findNavController().navigate(R.id.action_addProductFragment_to_showProductFragment)
         }
 
 
