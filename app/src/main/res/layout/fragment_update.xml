@@ -30,7 +30,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/proName"
+                    android:id="@+id/UpdateProName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -48,7 +48,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/proPrice"
+                    android:id="@+id/UpdateproPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="1234567890"
@@ -69,7 +69,7 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/proStock"
+                    android:id="@+id/UpdateproStock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="1234567890"

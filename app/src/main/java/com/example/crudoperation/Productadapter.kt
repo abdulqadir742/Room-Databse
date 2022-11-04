@@ -8,7 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
-class Productadapter(var productList: List<Product> = emptyList<Product>(),val itemClicked: (pid:Long) -> Unit):Adapter<MyViewHolder>() {
+class Productadapter(var productList: List<Product>,val itemClicked: (pid:Long,ProdName:String,ProdPrice:Int,ProdQuan:Int) -> Unit):Adapter<MyViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_view,parent,false))
     }
@@ -18,8 +18,13 @@ class Productadapter(var productList: List<Product> = emptyList<Product>(),val i
         holder.Pprice.text = productList.get(position).productPrice.toString()
         holder.Pstock.text = productList.get(position).productQuantity.toString()
         holder.listClick.setOnClickListener {
+
             var pid = productList.get(position).id.toString().toLong()
-            itemClicked(pid)
+            var ProdName = productList.get(position).productName
+            var ProdPrice = productList.get(position).productPrice.toString().toInt()
+            var ProdStock = productList.get(position).productQuantity.toString().toInt()
+
+            itemClicked(pid,ProdName,ProdPrice,ProdStock)
         }
     }
 

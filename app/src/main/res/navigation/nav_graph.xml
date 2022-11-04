@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_showProductFragment_to_updateFragment2"
             app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_showProductFragment_to_updateFragment3"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
@@ -46,5 +49,14 @@
         <argument
             android:name="productID"
             app:argType="long" />
+        <argument
+            android:name="pname"
+            app:argType="string" />
+        <argument
+            android:name="pprice"
+            app:argType="integer" />
+        <argument
+            android:name="pstock"
+            app:argType="integer" />
     </fragment>
 </navigation>

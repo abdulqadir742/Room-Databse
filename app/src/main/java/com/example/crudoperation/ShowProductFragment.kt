@@ -39,8 +39,12 @@ class ShowProductFragment : Fragment() {
 
 
         val prdList = binding.recycleView
+        fun updateData1(pid: Long, pName: String, pprice: Int, pstock: Int) {
+                var directions = ShowProductFragmentDirections.actionShowProductFragmentToUpdateFragment(pid,pName,pprice,pstock)
+                findNavController().navigate(directions)
+        }
         DB.productDao().getData().observe(viewLifecycleOwner, Observer {
-            fun itemClicked(pid:Long)
+            fun itemClicked(pid:Long,PName:String,Pprice:Int,Pstock:Int)
             {
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage("Do you want to delete or update data")
@@ -55,7 +59,7 @@ class ShowProductFragment : Fragment() {
                         .show()
                 }
 
-                builder.setNegativeButton("UPDATE DATA") { dialogInterface, which -> updateData()
+                builder.setNegativeButton("UPDATE DATA") { dialogInterface, which -> updateData1(pid,PName,Pprice,Pstock)
                     Toast.makeText(context, "click On Update", Toast.LENGTH_LONG).show()
                 }
 
@@ -71,41 +75,14 @@ class ShowProductFragment : Fragment() {
 
         })
        binding.floatingButton.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
-            builder.setMessage("Do you want to update or add data")
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
+           findNavController().navigate(R.id.action_showProductFragment_to_addProductFragment)
 
-            builder.setPositiveButton("ADD DATA") { dialogInterface, which -> Add_Data()
-                Toast.makeText(context, "clicked On Add Data", Toast.LENGTH_LONG).show()
-            }
+       }
 
-            builder.setNeutralButton("Cancel") { dialogInterface, which ->
-                Toast.makeText(context, "clicked cancel\n operation cancel", Toast.LENGTH_LONG)
-                    .show()
-            }
-
-            builder.setNegativeButton("UPDATE DATA") { dialogInterface, which -> updateData()
-                Toast.makeText(context, "click On Update", Toast.LENGTH_LONG).show()
-            }
-
-            val alertDialog: AlertDialog = builder.create()
-
-            alertDialog.setCancelable(false)
-            alertDialog.show()
-        }
-
-//        val pID = ShowProductFragmentDirection
 
         return binding.root
     }
 
-    private fun Add_Data() {
-        findNavController().navigate(R.id.action_showProductFragment_to_addProductFragment)
-    }
-
-    private fun updateData() {
-        findNavController().navigate(R.id.action_showProductFragment_to_updateFragment)
-    }
 }
 
 

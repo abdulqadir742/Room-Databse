@@ -35,14 +35,6 @@ class AddProductFragment : Fragment() {
             var ProductPrice = binding.proPrice.text.toString().toInt()
             var ProductStock = binding.proStock.text.toString().toInt()
 
-//            if (TextUtils.isEmpty(ProductName) && ProductPrice == null && ProductStock == null)
-//            {
-//                binding.proName.setError("Please Enter Your Product Name")
-//                binding.proPrice.setError("Please Enter Price")
-//                binding.proStock.setError("Please Enter Stock")
-//            }
-
-
             GlobalScope.launch {
                 DB.productDao().insert(Product(0,ProductName,ProductPrice,ProductStock))
             }
